@@ -9,8 +9,10 @@ import React from "react";
 
 const DetailProduct = () => {
   const params = useParams();
+  console.log("params", params);
   const { data } = useFetchSaleById(Number(params.id));
   const { data: product } = useFetchProduct();
+
   return (
     <div className="bg-white p-5 rounded-lg">
       <Header title="Detail Product" />

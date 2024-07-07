@@ -4,14 +4,13 @@ import InputForm from "@/app/components/Elements/Input/InputForm";
 import Header from "@/app/components/Fragements/Header/Header";
 import { useFetchProduct } from "@/app/features/product/useFetchProduct";
 import { useEditSale } from "@/app/features/sale/useEditSale";
-import { useFetchSale } from "@/app/features/sale/useFetchSale";
 import { useFetchSaleById } from "@/app/features/sale/useFetchSaleById";
 import { DataPostSale } from "@/app/type/table";
 import { saleSchema } from "@/app/utils/validationSale";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { navigate } from "@/app/lib/redirect";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Controller,
   SubmitHandler,
@@ -19,6 +18,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { FaTrashCan } from "react-icons/fa6";
+import { useFetchSale } from "@/app/features/sale/useFetchSale";
 
 const EditProduct = () => {
   const params = useParams();
@@ -34,22 +34,27 @@ const EditProduct = () => {
     reset,
     formState: { errors },
   } = useForm<DataPostSale>({
-    defaultValues: {
-      transaction_date: new Date().toISOString().slice(0, 10),
-      customer_name: data?.customer_name,
-      invoice_id: data?.invoice_id,
-      subtotal: data?.subtotal,
-      tax: data?.tax,
-      discount: data?.discount,
-      total_price: data?.total_price,
-      detail: data?.detail.map((item) => ({
-        product_id: item.product_id,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-    },
     resolver: zodResolver(saleSchema),
   });
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        transaction_date: new Date().toISOString().slice(0, 10),
+        customer_name: data.customer_name,
+        invoice_id: data.invoice_id,
+        subtotal: data.subtotal,
+        tax: data.tax,
+        discount: data.discount,
+        total_price: data.total_price,
+        detail: data.detail.map((item) => ({
+          product_id: item.product_id,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      });
+    }
+  }, [data, reset]);
 
   const { fields, append, remove } = useFieldArray({
     name: "detail",
