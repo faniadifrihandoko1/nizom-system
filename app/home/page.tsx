@@ -18,7 +18,7 @@ const HomePage = () => {
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const search = searchParams.get("search")?.toString();
+  const search = searchParams.get("search") || "";
   const { data, refetch } = useFetchSale({ search, limit, page });
 
   useEffect(() => {
