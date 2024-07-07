@@ -13,7 +13,7 @@ import {
   Controller,
 } from "react-hook-form";
 import { useCreateSale } from "../features/sale/useCreateSale";
-import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import Header from "../components/Fragements/Header/Header";
 import { useFetchSale } from "../features/sale/useFetchSale";

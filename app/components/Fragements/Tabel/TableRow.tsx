@@ -5,7 +5,7 @@ import formatDate from "@/app/utils/formatDate";
 import Link from "next/link";
 import DeleteModal from "../Modal/Delete";
 import { useDeleteSale } from "@/app/features/sale/useDeleteSale";
-import { useFetchSale } from "@/app/features/sale/useFetchSale";
+
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 

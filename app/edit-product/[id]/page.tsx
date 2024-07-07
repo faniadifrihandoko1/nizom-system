@@ -6,7 +6,6 @@ import { useFetchProduct } from "@/app/features/product/useFetchProduct";
 import { useEditSale } from "@/app/features/sale/useEditSale";
 import { useFetchSale } from "@/app/features/sale/useFetchSale";
 import { useFetchSaleById } from "@/app/features/sale/useFetchSaleById";
-import { axiosInstance } from "@/app/lib/axios";
 import { DataPostSale } from "@/app/type/table";
 import { saleSchema } from "@/app/utils/validationSale";
 import { zodResolver } from "@hookform/resolvers/zod";
