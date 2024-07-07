@@ -40,7 +40,9 @@ const EditProduct = () => {
   useEffect(() => {
     if (data) {
       reset({
-        transaction_date: new Date(data.transaction_date).toISOString().slice(0, 10),
+        transaction_date: new Date(data.transaction_date)
+          .toISOString()
+          .slice(0, 10),
         customer_name: data.customer_name,
         invoice_id: data.invoice_id,
         subtotal: data.subtotal,
@@ -74,6 +76,7 @@ const EditProduct = () => {
   const { mutate } = useEditSale({
     onSuccess: () => {
       refetch();
+      alert("Edit Success");
       navigate("/");
     },
   });
@@ -232,6 +235,11 @@ const EditProduct = () => {
             </tbody>
           </table>
         </div>
+        {errors.detail?.root?.message && (
+          <p className="text-red-500 text-xs text-left">
+            {errors.detail?.root?.message}
+          </p>
+        )}
         <button
           type="button"
           className="bg-blue-500 text-white w-full rounded-lg p-1 hover:bg-blue-800"
@@ -260,6 +268,11 @@ const EditProduct = () => {
               classNameLabel="w-1/4"
               register={register}
             />
+            {errors.tax && (
+              <p className="text-red-500 text-xs text-right">
+                {errors.tax.message}
+              </p>
+            )}
             <InputForm
               label="diskon :"
               name="discount"
@@ -269,6 +282,11 @@ const EditProduct = () => {
               classNameLabel="w-1/4"
               register={register}
             />
+            {errors.discount && (
+              <p className="text-red-500 text-xs text-right">
+                {errors.discount.message}
+              </p>
+            )}
             <InputForm
               label="Grand Total :"
               name="total_price"

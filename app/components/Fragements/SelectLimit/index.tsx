@@ -18,7 +18,7 @@ const SelectLimit: React.FC<SelectLimitProps> = ({
     setIsOpen(false);
   };
 
-  const dropdownItems = [5, 10, 15, 20, 25];
+  const dropdownItems = [10, 15, 20, 25];
 
   return (
     <div className="relative h-full">

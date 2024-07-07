@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import InputForm from "../components/Elements/Input/InputForm";
 import Input from "../components/Elements/Input/Input";
 import { FaTrashCan } from "react-icons/fa6";
@@ -18,13 +17,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Header from "../components/Fragements/Header/Header";
 import { useFetchSale } from "../features/sale/useFetchSale";
 import { saleSchema } from "../utils/validationSale";
-import { ToastContainer, toast } from "react-toastify";
 import { navigate } from "../lib/redirect";
 
 const AddProduct = () => {
   const { refetch } = useFetchSale({});
   const { data: products } = useFetchProduct();
-  const notify = () => toast("Created Successfully");
+  const indonesianDate = new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Jakarta",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 
   const {
     register,
@@ -37,7 +40,7 @@ const AddProduct = () => {
   } = useForm<DataPostSale>({
     resolver: zodResolver(saleSchema),
     defaultValues: {
-      transaction_date: new Date().toISOString().slice(0, 10),
+      transaction_date: indonesianDate,
       customer_name: "",
       invoice_id: "",
       subtotal: 0,
@@ -45,6 +48,11 @@ const AddProduct = () => {
       discount: "",
       total_price: 0,
       detail: [
+        {
+          product_id: 0,
+          quantity: 1,
+          price: 0,
+        },
         {
           product_id: 0,
           quantity: 1,
@@ -71,8 +79,8 @@ const AddProduct = () => {
 
   const { mutate } = useCreateSale({
     onSuccess: () => {
-      notify();
       refetch();
+      alert("Success Create Sale");
       navigate("/");
     },
   });
@@ -95,7 +103,6 @@ const AddProduct = () => {
   return (
     <div className="bg-white p-5 rounded-lg">
       <Header title="Add Product" />
-      <ToastContainer />
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-10">
           <div className="w-1/4">
@@ -124,6 +131,11 @@ const AddProduct = () => {
               register={register}
               required
             />
+            {errors.transaction_date && (
+              <p className="text-red-500 text-xs">
+                {errors.transaction_date.message}
+              </p>
+            )}
           </div>
         </div>
         <div className="flex">
@@ -137,6 +149,11 @@ const AddProduct = () => {
               register={register}
               required
             />
+            {errors.customer_name && (
+              <p className="text-red-500 text-xs">
+                {errors.customer_name.message}
+              </p>
+            )}
           </div>
         </div>
         <div className="overflow-x-auto relative">

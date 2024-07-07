@@ -19,7 +19,7 @@ const HomePage = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [sortOrder, setSortOrder] = useState<string>("");
@@ -102,7 +102,7 @@ const HomePage = () => {
                   type="text"
                   className="bg-[#d9e2f6] h-10 px-12 rounded-full focus:outline-none hover:cursor-pointer"
                   name="search"
-                  placeholder="Search..."
+                  placeholder="Search by Invoice"
                   onChange={handleSearch}
                   defaultValue={search}
                 />

@@ -35,7 +35,7 @@ export const FilterDropdown = ({ onSortChange }: FilterProps) => {
                 checked={sortOrder === "asc"}
                 onChange={handleSortChange}
               />
-              <span className="ml-2">Oldest</span>
+              <span className="ml-2">Terlama</span>
             </label>
             <label className="flex items-center mt-2">
               <input
@@ -45,7 +45,7 @@ export const FilterDropdown = ({ onSortChange }: FilterProps) => {
                 checked={sortOrder === "desc"}
                 onChange={handleSortChange}
               />
-              <span className="ml-2">Newest</span>
+              <span className="ml-2">Terbaru</span>
             </label>
           </div>
         </div>

@@ -16,8 +16,8 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-lg font-bold mb-4">Delete Confirmation</h2>
-        <p>Are you sure you want to delete this item?</p>
+        <h2 className="text-lg font-bold mb-4">Hapus Konfirmasi</h2>
+        <p>Apakah anda yakin ingin menghapus item ini?</p>
         <div className="mt-4 flex justify-end gap-2">
           <button
             className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
