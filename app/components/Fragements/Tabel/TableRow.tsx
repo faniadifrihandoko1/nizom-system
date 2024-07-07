@@ -62,7 +62,7 @@ const TableRow: React.FC<TableRowProps> = ({
         <td className="p-3 px-1 whitespace-nowrap">
           <div className="text-left">{data.invoice_id}</div>
         </td>
-        <td className="p-3  whitespace-nowrap">
+        <td className="p-3 px-1 whitespace-nowrap">
           <div className="text-left text-gray-800">{data.customer_name}</div>
         </td>
         <td className="p-3  whitespace-nowrap">
