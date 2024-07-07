@@ -49,17 +49,17 @@ const SelectLimit: React.FC<SelectLimitProps> = ({
       {isOpen && (
         <div
           id="dropdown"
-          className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-20 dark:bg-gray-700"
+          className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-14 "
         >
           <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
+            className="py-2 text-sm text-gray-700 "
             aria-labelledby="dropdownDefaultButton"
           >
             {dropdownItems.map((item) => (
               <li key={item}>
                 <button
                   onClick={() => handleItemClick(item)}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-300 "
                 >
                   {item}
                 </button>
