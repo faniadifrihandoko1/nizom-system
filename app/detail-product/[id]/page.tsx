@@ -4,6 +4,7 @@ import InputForm from "@/app/components/Elements/Input/InputForm";
 import Header from "@/app/components/Fragements/Header/Header";
 import { useFetchProduct } from "@/app/features/product/useFetchProduct";
 import { useFetchSaleById } from "@/app/features/sale/useFetchSaleById";
+import formatRupiah from "@/app/utils/formatRupiah";
 import { useParams } from "next/navigation";
 import React from "react";
 
@@ -81,41 +82,42 @@ const DetailProduct = () => {
               <tr className="h-2">
                 <td colSpan={5}></td>
               </tr>
-              {data?.detail.map((row) => (
-                <tr key={row.id}>
-                  <td className="p-1">
-                    {
-                      product?.find((product) => product.id === row.product_id)
-                        ?.name
-                    }
-                  </td>
-                  <td className="p-1">
-                    {" "}
-                    <Input
-                      type="number"
-                      className="bg-slate-300"
-                      readonly
-                      value={row.price}
-                    />
-                  </td>
-                  <td className="p-1">
-                    <Input
-                      type="number"
-                      className="bg-slate-300"
-                      readonly
-                      value={row.quantity}
-                    />
-                  </td>
-                  <td className="p-1">
-                    <Input
-                      type="number"
-                      className="w-full bg-slate-300"
-                      readonly
-                      value={row.price * row.quantity}
-                    />
-                  </td>
-                </tr>
-              ))}
+              {data?.detail.map((row) => {
+                const productName = product?.find(
+                  (product) => product.id === row.product_id
+                )?.name;
+                const totalPrice = row.price * row.quantity;
+
+                return (
+                  <tr key={row.id}>
+                    <td className="p-1">{productName}</td>
+                    <td className="p-1">
+                      <Input
+                        type="number"
+                        className="bg-slate-300"
+                        readonly
+                        value={row.price}
+                      />
+                    </td>
+                    <td className="p-1">
+                      <Input
+                        type="number"
+                        className="bg-slate-300"
+                        readonly
+                        value={row.quantity}
+                      />
+                    </td>
+                    <td className="p-1">
+                      <Input
+                        type="text"
+                        className="w-full bg-slate-300"
+                        readonly
+                        value={formatRupiah(totalPrice)}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -130,7 +132,7 @@ const DetailProduct = () => {
               classNameInput="w-3/4 bg-slate-300"
               classNameLabel="w-1/4"
               readonly
-              value={data?.subtotal}
+              value={formatRupiah(data?.subtotal ?? 0)}
             />
             <InputForm
               label="Pajak :"
@@ -158,7 +160,7 @@ const DetailProduct = () => {
               classNameInput="w-3/4 bg-slate-300"
               classNameLabel="w-1/4"
               readonly
-              value={data?.total_price}
+              value={data?.total_price ? formatRupiah(data?.total_price) : ""}
             />
           </div>
         </div>

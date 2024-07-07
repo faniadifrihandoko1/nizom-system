@@ -13,6 +13,7 @@ import Header from "./components/Fragements/Header/Header";
 import SelectLimit from "./components/Fragements/SelectLimit";
 import Tabel from "./components/Fragements/Tabel";
 import { Pagination } from "./components/Fragements/Pagination/Pagination";
+import { FilterDropdown } from "./components/Fragements/Modal/Filter";
 
 const HomePage = () => {
   const searchParams = useSearchParams();
@@ -21,8 +22,15 @@ const HomePage = () => {
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [sortOrder, setSortOrder] = useState<string>("");
   const search = searchParams.get("search") || "";
-  const { data, refetch } = useFetchSale({ search, limit, page });
+  const { data, refetch } = useFetchSale({
+    search,
+    limit,
+    page,
+    sort: sortOrder,
+    order: "transaction_date",
+  });
 
   useEffect(() => {
     if (data) {
@@ -67,6 +75,10 @@ const HomePage = () => {
     [refetch]
   );
 
+  const handleSortChange = (order: string) => {
+    setSortOrder(order);
+    refetch();
+  };
   return (
     <div>
       <div
@@ -95,15 +107,13 @@ const HomePage = () => {
                   defaultValue={search}
                 />
               </div>
-              <div className="text-gray-800 text-sm py-2 px-2 flex gap-1 items-center bg-[#d9e2f6] rounded-md hover:bg-[#b4c2f4] cursor-pointer">
-                <IoFilter size={20} color="#2563EB" />
-              </div>
+              <FilterDropdown onSortChange={handleSortChange} />
               <Link
                 href={"/add-product"}
                 className="text-gray-800 text-sm py-2 px-2 flex gap-1 items-center bg-[#d9e2f6] rounded-md hover:bg-[#b4c2f4] cursor-pointer"
               >
                 <MdOutlineAddCircle size={20} color="#2563EB" />
-                <h1 className="text-[#2563EB] font-semibold">Add New</h1>
+                <h1 className="text-gray-800 text-sm">Add New</h1>
               </Link>
             </div>
           </div>

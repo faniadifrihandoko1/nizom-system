@@ -18,14 +18,14 @@ const SelectLimit: React.FC<SelectLimitProps> = ({
     setIsOpen(false);
   };
 
-  const dropdownItems = [5,10, 15, 20, 25];
+  const dropdownItems = [5, 10, 15, 20, 25];
 
   return (
-    <div className="relative">
+    <div className="relative h-full">
       <button
         id="dropdownDefaultButton"
         onClick={toggleDropdown}
-        className="text-black border-2 border-slate-200 bg-white focus:ring-4 font-medium rounded-lg text-sm px-2 py-1 h-full flex justify-between items-center"
+        className="text-black border-2  border-slate-200 bg-white focus:ring-4 font-medium rounded-lg text-sm px-2 py-2 h-full flex justify-between items-center"
         type="button"
       >
         {selectedLimit}

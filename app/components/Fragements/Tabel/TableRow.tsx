@@ -8,6 +8,7 @@ import { useDeleteSale } from "@/app/features/sale/useDeleteSale";
 
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import formatRupiah from "@/app/utils/formatRupiah";
 
 interface TableRowProps {
   data: DataTables;
@@ -69,7 +70,9 @@ const TableRow: React.FC<TableRowProps> = ({
           </div>
         </td>
         <td className="p-3 whitespace-nowrap">
-          <div className="text-center text-gray-800">{data.total_price}</div>
+          <div className="text-center text-gray-800">
+            {formatRupiah(data.total_price)}
+          </div>
         </td>
         <td className="p-3 whitespace-nowrap relative">
           <div className="text-lg text-center flex justify-center">

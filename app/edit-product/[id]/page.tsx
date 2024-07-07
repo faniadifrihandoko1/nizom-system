@@ -40,7 +40,7 @@ const EditProduct = () => {
   useEffect(() => {
     if (data) {
       reset({
-        transaction_date: new Date().toISOString().slice(0, 10),
+        transaction_date: new Date(data.transaction_date).toISOString().slice(0, 10),
         customer_name: data.customer_name,
         invoice_id: data.invoice_id,
         subtotal: data.subtotal,
